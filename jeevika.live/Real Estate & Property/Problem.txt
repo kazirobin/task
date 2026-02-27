@@ -1,8 +1,56 @@
          //Company or Office Space Start Here//
 1. In the **Add Office Space** section, when creating a new office space, the country option should be selectable for a better UI.
-2. When I click the down arrow on the price,area,capacity,Meeting Rooms,Parking Spaces,Floor,Total Floors button, the value goes into minus if it is 0. It should not go below 0 or into negative numbers.
+2. When I click the down arrow on the price,area,capacity,Meeting Rooms,Parking Spaces,Floor,Total Floors button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
 3. When I try to drag an image to upload it, the image does not upload.
 4. The **Add Office Space** submit button is working properly.
 5. The office space is successfully displayed on the main website.
             //Company or Office Space End Here//
+
+            //Construction & Building Materials Start Here//
+1. When I click the down arrow on the price,Minimum Order Quantity button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2. When I try to drag an image to upload it, the image does not upload.
+3. After filling in all the details and clicking the Create button, an error appears.
+    Here is the console error message:
+    Error saving construction material: Error: Failed to save construction material (index-DeHeQErG.js:785)
+    This means the system is unable to save the construction material data to the database or backend, which is why the creation process is failing.
+4. The Construction & Building Materials section is not displaying successfully. There is still an error.
+            //Construction & Building Materials End Here//
+
+            //Factory Industrial Land Start Here//
+1. When I click the down arrow on the price,area, button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2. When I try to drag an image to upload it, the image does not upload.
+3.The Factory Industrial Land is successfully displayed on the main website.
+            //Factory Industrial Land End Here//
+
+            //Hostels & PG Start Here//
+1. When I click the down arrow on the Price Per Month,Total Beds,Available Beds button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.In the Contact Phone field, only numbers should be allowed.However, right now I am able to enter alphabets as well. This field should restrict input to numbers only.
+3.  When I try to drag an image to upload it, the image does not upload.
+4. After filling in all the details and clicking the Create button, this error appears in the console:
+    Error saving hostel/PG: Error: Base64 (data:) media is not allowed in request body. Upload the file to /api/upload (or /api/upload-multiple) and store only the returned /uploads/... URL in the database. (index-DeHeQErG.js:785)
+    This means the system is trying to send the image directly as Base64 data in the request, which is not allowed. Instead, you need to first upload the image to the server using /api/upload (or /api/upload-multiple) and then save the URL returned by that upload in the database. Only the URL should be stored, not the actual image data.  
+5.Hostels & PG section is not displaying successfully. There is still an error.
+            //Hostels & PG End Here//
+
+            //Local Market Commercial Properties start Here//
+1.When I click the down arrow on the Price,Area (sq.ft), button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.When I try to drag an image to upload it, the image does not upload.
+3.The Local Market Commercial Properties is successfully displayed on the main website.
+            //Local Market Commercial Properties End Here//
+
+            //Property Deals (Buy/Sell) start Here//
+1.When I click the down arrow on the Price,Area,Bedrooms,Bathrooms,Floors button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.After filling in all the details and clicking the Create button, this error appears in the console:
+POST https://jeevika.live/api/admin/property-deals 400 (Bad Request)
+This means the request to save the property deal failed because the server rejected it as a Bad Request. In other words, some required data is missing, invalid, or not in the format the API expects, so the server cannot process it.
+3.Property Deals (Buy/Sell) section is not displaying successfully. There is still an error.
+            //Property Deals (Buy/Sell) End Here//
+
+            
 
