@@ -2,3 +2,14 @@
 
 .2 When I add Skill Training & Certification it is added successfully.
 3. hello woard
+
+
+
+// Academies (Music, Arts, Sports)  start 
+this option is not found in my dashboard
+// Academies (Music, Arts, Sports)  end
+
+// Cricket & Sports Training Start
+LanguageClassesForm loaded cricket-sports-training 
+when i click apply button it show me this message and it not working 
+// Cricket & Sports Training End
