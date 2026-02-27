@@ -1,0 +1,61 @@
+                    //Electronics & Gadgets Start here//
+1. When I click the down arrow on the Price (₹),Original Price (₹) button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.In the Contact Phone field, only numbers should be allowed.
+    However, right now I am able to enter alphabets as well. This field should restrict input to numbers only.
+3. After filling in all the details and clicking the Create button, the following error appears in the console:
+    POST https://jeevika.live/api/admin/electronics-gadgets 400 (Bad Request)
+    This means the request to create or save the electronics/gadgets data was rejected by the server with a 400 Bad Request response.
+    A 400 error usually indicates that:
+        * Some required fields are missing
+        * The data format is incorrect
+        * Invalid values are being sent
+        * The request body does not match the API’s expected structure
+    Because of this, the server is unable to process and store the submitted data.
+4.Electronics & Gadgets section is not displaying successfully. There is still an error.
+                        //Electronics & Gadgets End here//
+
+                        //New Phones, Tablets & Accessories Start here//
+1. When I click the down arrow on the Price (₹),MRP (₹),Discount % button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.In the Contact Phone field, only numbers should be allowed.
+    However, right now I am able to enter alphabets as well. This field should restrict input to numbers only.
+3.New Phones, Tablets & Accessories is successfully displayed on the main website.
+                        //New Phones, Tablets & Accessories End here//
+
+                        //Computer, Mobile & Laptop Repair Services Start here//
+1. When I click the down arrow on the Experience (Years),Base Service Charge (₹),Inspection Charge (₹) button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.Computer, Mobile & Laptop Repair Services is successfully displayed on the main website.    
+                        //Computer, Mobile & Laptop Repair Services End here//
+
+                        //Second Hand Phones, Tablets & Accessories start here//
+1. When I click the down arrow on the Price (₹) *,Original Price (₹) button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.In the Contact Phone field, only numbers should be allowed.
+    However, right now I am able to enter alphabets as well. This field should restrict input to numbers only.
+3.After filling in all the details and clicking the Create button, the following error appears in the console:
+    POST https://jeevika.live/api/admin/second-hand-phones-tablets-accessories 400 (Bad Request)
+    This means the request to create or save the second-hand phones, tablets, and accessories data was rejected by the server with a 400 Bad Request response.
+    A 400 error indicates that the server could not process the request because of invalid or incomplete data. Possible reasons include:
+                Missing required fields
+                Incorrect data format
+                Invalid field values
+                The request body structure does not match what the API expects
+    As a result, the data is not being saved to the database.
+4.Second Hand Phones, Tablets & Accessories section is not displaying successfully. There is still an error.
+                        //Second Hand Phones, Tablets & Accessories End here//
+
+                        //Service Centre / Warranty first here//
+1. there is no option available in the sidebar to select any section. Because of this, the instruction shown on the dashboard is not valid, and this appears to be an error.
+                        //Service Centre / Warranty End here//
+
+                        //Telecommunication Services start here//
+1. When I click the down arrow on the Monthly Price (₹),Yearly Price (₹),Installation Charges (₹),Security Deposit (₹) button, the value goes into minus if it is 0. It should not 
+    go below 0 or into negative numbers.
+2.In the Contact Phone field, only numbers should be allowed.
+    However, right now I am able to enter alphabets as well. This field should restrict input to numbers only.
+3.Telecommunication Services is successfully displayed on the main website.
+                        //Telecommunication Services End here//
+
+
