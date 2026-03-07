@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova · enterprise hero with wave border</title>
+  <!-- Font and minimal reset – clean, modern SaaS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <style>
+    /* RESET & base — crisp, minimal, production ready */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0a0c0e;
+      scroll-behavior: smooth;
+    }
+
+    /* Hero section: full viewport */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+      background-color: #0b0f12;
+    }
+
+    /* Background video - enhanced brightness */
+    .hero__video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      filter: brightness(1.2) contrast(1.1); /* Makes video brighter and more vibrant */
+    }
+
+    /* Dark gradient overlay - adjusted for brightness */
+    .hero__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 90%),
+        linear-gradient(180deg, rgba(10,12,16,0.2) 0%, rgba(0,0,0,0.65) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Content layer */
+    .hero__content {
+      position: relative;
+      z-index: 5;
+      max-width: 1100px;
+      margin: 0 24px;
+      padding: 0 16px;
+      text-align: center;
+      animation: contentFadeIn 1.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.25em;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      animation: slideUp 1s 0.1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 700px;
+      margin: 0 auto 1.8rem auto;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+      animation: slideUp 1s 0.2s ease-out forwards;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    /* CTA Button */
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.98);
+      color: #0f1419;
+      font-weight: 600;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.15) inset;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.2s;
+      animation: fadeInCta 1s 0.4s ease-out forwards;
+      opacity: 0;
+      transform: scale(0.96);
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .hero__cta:hover {
+      background: #ffffff;
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 28px 40px -12px black, 0 0 0 1px rgba(255,255,255,0.3) inset;
+    }
+
+    /* Wave Border Container */
+    .wave-overlay-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      pointer-events: none;
+      line-height: 0;
+    }
+
+    .wave-overlay {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 250px; /* Slightly larger for better visibility */
+      object-fit: cover;
+      object-position: bottom;
+      filter: drop-shadow(0 -4px 10px rgba(0,0,0,0.3));
+    }
+
+    /* Gradient edge above wave */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20vh;
+      background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    /* Next section to demonstrate scrolling */
+    .next-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      color: black;
+    }
+
+    .next-section__content {
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .next-section__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: black;
+    }
+
+    .next-section__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 120px; /* Above wave */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      color: black;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Animations */
+    @keyframes contentFadeIn {
+      0% { opacity: 0; backdrop-filter: blur(8px); }
+      100% { opacity: 1; backdrop-filter: blur(0); }
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInCta {
+      0% { opacity: 0; transform: scale(0.96); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsive wave heights */
+    @media (max-width: 1400px) {
+      .wave-overlay {
+        max-height: 220px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .wave-overlay {
+        max-height: 180px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .wave-overlay {
+        max-height: 150px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wave-overlay {
+        max-height: 120px;
+      }
+      .scroll-indicator {
+        bottom: 100px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .wave-overlay {
+        max-height: 90px;
+      }
+      .scroll-indicator {
+        bottom: 80px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .wave-overlay {
+        max-height: 70px;
+      }
+      .scroll-indicator {
+        bottom: 60px;
+      }
+    }
+
+    /* Landscape orientation */
+    @media (max-height: 600px) and (orientation: landscape) {
+      .hero {
+        min-height: 400px;
+      }
+      .hero__title {
+        font-size: clamp(1.8rem, 5vh, 2.8rem);
+      }
+      .wave-overlay {
+        max-height: 60px;
+      }
+      .scroll-indicator {
+        bottom: 50px;
+      }
+    }
+
+    /* Small height screens */
+    @media (max-height: 700px) {
+      .hero__title {
+        margin-bottom: 0.15em;
+      }
+      .hero__subtitle {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <!-- BACKGROUND VIDEO with correct source -->
+    <video class="hero__video" autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080/0f1215/1a1f25?text=loading">
+      <source src="https://cdn.buttercms.com/2hRqK6MWSDePsjhorXZn" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Dark gradient overlay -->
+    <div class="hero__overlay"></div>
+
+    <!-- Center content -->
+    <div class="hero__content">
+      <h1 class="hero__title">Build beyond <br>the horizon.</h1>
+      <p class="hero__subtitle">Nova is the enterprise platform for modern teams — secure, scalable, and beautifully intuitive.</p>
+      <a href="#next" class="hero__cta" aria-label="Get started">Start your journey →</a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">Scroll to explore ↓</div>
+
+    <!-- WAVE BORDER - Using correct URL from learningtree.se -->
+    <div class="wave-overlay-container">
+      <img src="https://www.learningtree.se/images/branding/wave-border.webp" 
+           class="wave-overlay" 
+           alt="Wave border" 
+           fetchpriority="high"
+           onerror="this.style.opacity='0.5'; this.style.backgroundColor='rgba(255,255,255,0.1)'; console.log('Wave image fallback activated');">
+    </div>
+  </section>
+
+  <!-- Next 100vh section for scrolling demonstration -->
+  <section id="next" class="next-section">
+    <div class="next-section__content">
+      <h2 class="next-section__title">Engineered for scale, designed for people</h2>
+      <p class="hero__subtitle" style="margin-bottom: 3rem;">Discover the platform that leading enterprises trust</p>
+      
+      <div class="next-section__grid">
+        <div class="feature-card">
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">⚡ Real-time sync</h3>
+          <p style="color: rgba(255,255,255,0.7);">Instant updates across your entire organization with zero latency.</p>
+        </div>
+        <div class="feature-card">
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">🔒 Enterprise security</h3>
+          <p style="color: rgba(255,255,255,0.7);">SOC2 compliant with end-to-end encryption and granular access controls.</p>
+        </div>
+        <div class="feature-card">
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">🌍 Global infrastructure</h3>
+          <p style="color: rgba(255,255,255,0.7);">Deployed across 5 continents for lightning-fast performance everywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      // Video handling with enhanced brightness
+      const video = document.querySelector('.hero__video');
+      if (video) {
+        video.muted = true;
+        video.play().catch(err => {
+          console.log("Autoplay prevented - using fallback");
+          // Create a fallback if video fails
+          video.style.display = 'none';
+        });
+      }
+
+      // Wave image handling - using the correct URL
+      const waveImg = document.querySelector('.wave-overlay');
+      if (waveImg) {
+        // Check if image loads successfully
+        waveImg.onload = function() {
+          console.log('Wave image loaded successfully');
+          this.style.opacity = '1';
+        };
+        
+        // Enhanced fallback if image fails
+        waveImg.onerror = function() {
+          console.log('Wave image failed to load - using CSS fallback');
+          this.style.display = 'none';
+          
+          // Create a CSS gradient fallback
+          const container = this.parentElement;
+          container.style.background = 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.25) 100%)';
+          container.style.height = '120px';
+          container.style.filter = 'blur(2px)';
+        };
+      }
+
+      // Smooth scroll for CTA button
+      document.querySelector('.hero__cta').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#next').scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
