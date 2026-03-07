@@ -1,550 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova · enterprise hero with wave border</title>
-  <!-- Font and minimal reset – clean, modern SaaS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <title>Nova · enterprise hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* RESET & base — crisp, minimal, production ready */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#fff;scroll-behavior:smooth}
+    
+    /* Hero - compact & flexible */
+    .hero{
+      position:relative;
+      width:100%;
+      height:80vh; /* desktop */
+      min-height:600px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:#fff;
+      background:#0b0f12;
     }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #ffffff;
-      scroll-behavior: smooth;
+    
+    /* Video + overlay in one line */
+    .hero video{
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      object-fit:cover;
+      z-index:0;
+      filter:brightness(1.2) contrast(1.1);
     }
-
-    /* Hero section: responsive heights */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 80vh; /* Desktop height */
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      color: white;
-      background-color: #0b0f12;
+    
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      background:radial-gradient(circle at 30% 40%, rgba(0,0,0,0.2), rgba(0,0,0,0.6) 90%),
+                 linear-gradient(180deg, rgba(10,12,16,0.1), rgba(0,0,0,0.7));
+      z-index:1;
     }
-
-    /* Background video - enhanced brightness */
-    .hero__video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      pointer-events: none;
-      filter: brightness(1.2) contrast(1.1);
+    
+    .hero-content{
+      position:relative;
+      z-index:5;
+      max-width:1100px;
+      margin:0 24px;
+      text-align:center;
+      animation:fadeIn 1.4s cubic-bezier(0.2,0.9,0.3,1);
     }
-
-    /* Dark gradient overlay - refined for better text contrast */
-    .hero__overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 30% 40%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 90%),
-        linear-gradient(180deg, rgba(10,12,16,0.1) 0%, rgba(0,0,0,0.7) 100%);
-      z-index: 1;
-      pointer-events: none;
+    
+    .hero-content h1{
+      font-size:clamp(2.5rem,8vw,5rem);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      line-height:1.1;
+      margin-bottom:0.3rem;
+      text-shadow:0 4px 30px rgba(0,0,0,0.5);
+      animation:slideUp 1s 0.1s forwards;
+      opacity:0;
+      transform:translateY(30px);
     }
-
-    /* Content layer */
-    .hero__content {
-      position: relative;
-      z-index: 5;
-      max-width: 1100px;
-      margin: 0 24px;
-      padding: 0 16px;
-      text-align: center;
-      animation: contentFadeIn 1.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    
+    .hero-content p{
+      font-size:clamp(1.1rem,3.5vw,1.6rem);
+      max-width:700px;
+      margin:0 auto 2rem;
+      text-shadow:0 2px 20px rgba(0,0,0,0.5);
+      animation:slideUp 1s 0.2s forwards;
+      opacity:0;
+      transform:translateY(25px);
     }
-
-    .hero__title {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 0.3em;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
-      animation: slideUp 1s 0.1s ease-out forwards;
-      opacity: 0;
-      transform: translateY(30px);
+    
+    .hero-content a{
+      display:inline-flex;
+      background:#fff;
+      color:#0f1419;
+      font-weight:600;
+      font-size:clamp(1rem,4vw,1.2rem);
+      padding:1rem 2.5rem;
+      border-radius:60px;
+      text-decoration:none;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1) inset;
+      transition:all 0.3s ease;
+      animation:fadeIn 1s 0.4s forwards;
+      opacity:0;
+      transform:scale(0.96);
     }
-
-    .hero__subtitle {
-      font-size: clamp(1.1rem, 3.5vw, 1.6rem);
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.9);
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-      animation: slideUp 1s 0.2s ease-out forwards;
-      opacity: 0;
-      transform: translateY(25px);
+    
+    .hero-content a:hover{
+      transform:scale(1.05) translateY(-3px);
+      box-shadow:0 30px 40px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.3) inset;
     }
-
-    /* CTA Button */
-    .hero__cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      color: #0f1419;
-      font-weight: 600;
-      font-size: clamp(1rem, 4vw, 1.2rem);
-      padding: 1rem 2.5rem;
-      border-radius: 60px;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1) inset;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
-      animation: fadeInCta 1s 0.4s ease-out forwards;
-      opacity: 0;
-      transform: scale(0.96);
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
+    
+    /* Wave container - simplified */
+    .wave{
+      position:absolute;
+      bottom:0;left:0;
+      width:100%;
+      z-index:10;
+      line-height:0;
+      pointer-events:none;
     }
-
-    .hero__cta:hover {
-      background: #ffffff;
-      transform: scale(1.05) translateY(-3px);
-      box-shadow: 0 30px 40px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.3) inset;
+    
+    .wave img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:220px;
+      object-fit:cover;
+      object-position:bottom;
+      filter:drop-shadow(0 -6px 12px rgba(0,0,0,0.25));
     }
-
-    .hero__cta:active {
-      transform: scale(1.02) translateY(-1px);
+    
+    /* Next section - clean white */
+    .next{
+      min-height:100vh;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:80px 24px;
+      color:#1a1e24;
     }
-
-    /* Wave Border Container */
-    .wave-overlay-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      pointer-events: none;
-      line-height: 0;
+    
+    .next-content{
+      max-width:1280px;
+      width:100%;
+      text-align:center;
     }
-
-    .wave-overlay {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 220px;
-      object-fit: cover;
-      object-position: bottom;
-      filter: drop-shadow(0 -6px 12px rgba(0,0,0,0.25));
+    
+    .next h2{
+      font-size:clamp(2.2rem,5vw,3.8rem);
+      font-weight:600;
+      letter-spacing:-0.02em;
+      margin-bottom:1.2rem;
+      color:#0f1419;
     }
-
-    /* Gradient edge above wave - more subtle */
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 15vh;
-      background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
-      z-index: 8;
-      pointer-events: none;
+    
+    .next > p{
+      font-size:clamp(1.1rem,3vw,1.5rem);
+      color:#4b5565;
+      max-width:700px;
+      margin:0 auto 4rem;
     }
-
-    /* Next section - professional white with proper spacing */
-    .next-section {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 24px;
-      color: #1a1e24;
+    
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:2rem;
+      margin:2rem 0;
     }
-
-    .next-section__content {
-      max-width: 1280px;
-      width: 100%;
-      text-align: center;
+    
+    .card{
+      background:#f8fafd;
+      padding:2.5rem 2rem;
+      border-radius:32px;
+      border:1px solid #eef2f6;
+      transition:all 0.3s;
+      text-align:left;
     }
-
-    .next-section__title {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
-      color: #0f1419;
-      line-height: 1.2;
+    
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 30px 40px -20px rgba(0,0,0,0.15);
+      border-color:#d0d9e4;
+      background:#fff;
     }
-
-    .next-section__subtitle {
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      font-weight: 400;
-      color: #4b5565;
-      max-width: 700px;
-      margin: 0 auto 4rem auto;
+    
+    .card .icon{font-size:2.5rem;margin-bottom:1.5rem}
+    .card h3{font-size:1.6rem;font-weight:600;margin-bottom:1rem;color:#0f1419}
+    .card p{color:#5d6877;line-height:1.6}
+    
+    .stats{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:4rem;
+      margin-top:5rem;
+      padding:2rem 0;
+      border-top:1px solid #eef2f6;
     }
-
-    .next-section__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-      margin-top: 2rem;
-    }
-
-    .feature-card {
-      background: #f8fafd;
-      padding: 2.5rem 2rem;
-      border-radius: 32px;
-      border: 1px solid #eef2f6;
-      transition: all 0.3s ease;
-      text-align: left;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.15);
-      border-color: #d0d9e4;
-      background: #ffffff;
-    }
-
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .feature-card h3 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #0f1419;
-    }
-
-    .feature-card p {
-      color: #5d6877;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    /* Stats section for professional look */
-    .stats-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4rem;
-      margin: 5rem 0 2rem;
-      padding: 2rem 0;
-      border-top: 1px solid #eef2f6;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #0f1419;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 0.95rem;
-      color: #6b788b;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    /* Scroll indicator - refined */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 140px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 15;
-      color: white;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      animation: bounce 2.2s infinite;
-      white-space: nowrap;
-      opacity: 0.9;
-      font-weight: 400;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-8px); }
-      60% { transform: translateX(-50%) translateY(-4px); }
-    }
-
+    
+    .stats div{text-align:center}
+    .stats .num{font-size:2.5rem;font-weight:700;color:#0f1419;margin-bottom:0.3rem}
+    .stats .label{font-size:0.95rem;color:#6b788b;letter-spacing:0.02em;text-transform:uppercase}
+    
     /* Animations */
-    @keyframes contentFadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+    
+    /* Mobile */
+    @media (max-width:768px){
+      .hero{height:60vh;min-height:500px}
+      .hero-content a{padding:0.9rem 2rem}
+      .next{padding:60px 20px}
+      .stats{gap:2rem}
     }
-
-    @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    
+    @media (max-width:480px){
+      .hero{min-height:450px}
+      .stats{flex-direction:column;gap:1.5rem}
     }
-
-    @keyframes fadeInCta {
-      0% { opacity: 0; transform: scale(0.96); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Mobile styles - 60vh for banner */
-    @media (max-width: 768px) {
-      .hero {
-        height: 60vh; /* Mobile height */
-        min-height: 500px;
-      }
-
-      .hero__title {
-        font-size: clamp(2.2rem, 7vw, 3.5rem);
-        margin-bottom: 0.3rem;
-      }
-
-      .hero__subtitle {
-        font-size: clamp(1rem, 3.5vw, 1.3rem);
-        margin-bottom: 1.8rem;
-      }
-
-      .hero__cta {
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
-      }
-
-      .scroll-indicator {
-        bottom: 100px;
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-      }
-
-      .next-section {
-        padding: 60px 20px;
-      }
-
-      .next-section__grid {
-        gap: 1.5rem;
-      }
-
-      .feature-card {
-        padding: 2rem 1.5rem;
-      }
-
-      .stats-container {
-        gap: 2rem;
-        margin: 3rem 0 1rem;
-      }
-
-      .stat-number {
-        font-size: 2rem;
-      }
-    }
-
-    /* Small mobile */
-    @media (max-width: 480px) {
-      .hero {
-        height: 60vh;
-        min-height: 450px;
-      }
-
-      .scroll-indicator {
-        bottom: 80px;
-      }
-
-      .stats-container {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-    }
-
-    /* Responsive wave heights */
-    @media (max-width: 1400px) {
-      .wave-overlay {
-        max-height: 200px;
-      }
-    }
-
-    @media (max-width: 1200px) {
-      .wave-overlay {
-        max-height: 180px;
-      }
-    }
-
-    @media (max-width: 992px) {
-      .wave-overlay {
-        max-height: 150px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .wave-overlay {
-        max-height: 120px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .wave-overlay {
-        max-height: 90px;
-      }
-    }
-
-    @media (max-width: 375px) {
-      .wave-overlay {
-        max-height: 70px;
-      }
-    }
-
-    /* Landscape orientation */
-    @media (max-height: 600px) and (orientation: landscape) {
-      .hero {
-        height: 100vh;
-        min-height: 400px;
-      }
-      .hero__title {
-        font-size: clamp(1.8rem, 5vh, 2.8rem);
-      }
-      .wave-overlay {
-        max-height: 60px;
-      }
-      .scroll-indicator {
-        bottom: 70px;
-      }
-    }
+    
+    /* Wave responsive */
+    @media (max-width:1200px){.wave img{max-height:180px}}
+    @media (max-width:768px){.wave img{max-height:120px}}
+    @media (max-width:480px){.wave img{max-height:90px}}
   </style>
 </head>
 <body>
   <section class="hero">
-    <!-- BACKGROUND VIDEO -->
-    <video class="hero__video" autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080/0f1215/1a1f25?text=loading">
+    <video autoplay muted loop playsinline>
       <source src="https://cdn.buttercms.com/2hRqK6MWSDePsjhorXZn" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
-
-    <!-- Dark gradient overlay -->
-    <!-- <div class="hero__overlay"></div> -->
-
-    <!-- Center content -->
-    <div class="hero__content">
-      <h1 class="hero__title">Build beyond <br>the horizon.</h1>
-      <p class="hero__subtitle">Nova is the enterprise platform for modern teams — secure, scalable, and beautifully intuitive.</p>
-      <a href="#next" class="hero__cta" aria-label="Get started">Start your journey →</a>
+    
+    <div class="hero-content">
+      <h1>Build beyond the horizon.</h1>
+      <p>Nova is the enterprise platform for modern teams — secure, scalable, and beautifully intuitive.</p>
+      <a href="#next">Start your journey →</a>
     </div>
-
-    <!-- Scroll indicator -->
-    <!-- <div class="scroll-indicator">Discover more</div> -->
-
-    <!-- WAVE BORDER -->
-    <div class="wave-overlay-container">
+    
+    <div class="wave">
       <img src="https://www.learningtree.se/images/branding/wave-border.webp" 
-           class="wave-overlay" 
-           alt="Wave border" 
-           fetchpriority="high"
-           onerror="this.style.opacity='0.5'; this.style.backgroundColor='rgba(255,255,255,0.1)'; console.log('Wave image fallback activated');">
+           alt="wave" 
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(180deg, transparent, rgba(255,255,255,0.3))';this.parentElement.style.height='120px'">
     </div>
   </section>
 
-  <!-- Professional white next section -->
-  <section id="next" class="next-section">
-    <div class="next-section__content">
-      <h2 class="next-section__title">Engineered for scale,<br>designed for people</h2>
-      <p class="next-section__subtitle">Discover the platform that leading enterprises trust to power their most critical operations</p>
+  <section id="next" class="next">
+    <div class="next-content">
+      <h2>Engineered for scale,<br>designed for people</h2>
+      <p>Discover the platform that leading enterprises trust to power their most critical operations</p>
       
-      <div class="next-section__grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Real-time sync</h3>
-          <p>Instant updates across your entire organization with zero latency and automatic conflict resolution.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>Enterprise security</h3>
-          <p>SOC2 Type II compliant with end-to-end encryption, SSO, and granular access controls.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌍</div>
-          <h3>Global infrastructure</h3>
-          <p>Deployed across 5 continents with 99.99% uptime SLA and edge caching for lightning performance.</p>
-        </div>
+      <div class="grid">
+        <div class="card"><div class="icon">⚡</div><h3>Real-time sync</h3><p>Instant updates across your entire organization with zero latency and automatic conflict resolution.</p></div>
+        <div class="card"><div class="icon">🔒</div><h3>Enterprise security</h3><p>SOC2 Type II compliant with end-to-end encryption, SSO, and granular access controls.</p></div>
+        <div class="card"><div class="icon">🌍</div><h3>Global infrastructure</h3><p>Deployed across 5 continents with 99.99% uptime SLA and edge caching for lightning performance.</p></div>
       </div>
-
-      <!-- Stats for credibility -->
-      <div class="stats-container">
-        <div class="stat-item">
-          <div class="stat-number">300+</div>
-          <div class="stat-label">Enterprise clients</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">99.99%</div>
-          <div class="stat-label">Uptime SLA</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">50M+</div>
-          <div class="stat-label">Users served</div>
-        </div>
+      
+      <div class="stats">
+        <div><div class="num">300+</div><div class="label">Enterprise clients</div></div>
+        <div><div class="num">99.99%</div><div class="label">Uptime SLA</div></div>
+        <div><div class="num">50M+</div><div class="label">Users served</div></div>
       </div>
     </div>
   </section>
 
   <script>
-    (function() {
-      // Video handling
-      const video = document.querySelector('.hero__video');
-      if (video) {
-        video.muted = true;
-        video.play().catch(err => {
-          console.log("Autoplay prevented");
-          video.style.display = 'none';
-        });
-      }
-
-      // Wave image handling
-      const waveImg = document.querySelector('.wave-overlay');
-      if (waveImg) {
-        waveImg.onload = function() {
-          console.log('Wave image loaded');
-          this.style.opacity = '1';
-        };
-        
-        waveImg.onerror = function() {
-          console.log('Wave image failed - using CSS fallback');
-          this.style.display = 'none';
-          const container = this.parentElement;
-          container.style.background = 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.3) 100%)';
-          container.style.height = '120px';
-        };
-      }
-
-      // Smooth scroll
-      document.querySelector('.hero__cta').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('#next').scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    })();
+    document.querySelector('video')?.play().catch(()=>{});
+    document.querySelector('.hero-content a').addEventListener('click',(e)=>{
+      e.preventDefault();
+      document.querySelector('#next').scrollIntoView({behavior:'smooth'});
+    });
   </script>
 </body>
 </html>
